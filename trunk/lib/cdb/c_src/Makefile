@@ -11,6 +11,12 @@ CDB_PREFIX = /usr/local
 
 all: $(OBJECTS)
 
+install:
+	@echo Nothing to be done for install.
+
+docs:
+	@echo Nothing to be done for docs.
+
 cdb_drv.so:
 	test -d ../priv/lib || mkdir -p ../priv/lib
 	$(CC) -I$(CDB_PREFIX)/include -I$(ERL_TOP_RUN)/usr/include -I$(ERL_INT_INC) -o ../priv/lib/cdb_drv.so -fpic -shared cdb_drv.c $(ERL_INT_LIB)/libei.a -L$(CDB_PREFIX)/lib -lcdb 
