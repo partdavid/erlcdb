@@ -85,7 +85,7 @@ info() ->
 %% Description: Initiates the server
 %%--------------------------------------------------------------------
 init(Appdir) ->
-   Libloc = filename:join([Appdir, "priv", "lib"]),
+   Libloc = filename:join([Appdir, "lib"]),
    Loaded = case erl_ddll:load_driver(Libloc, "cdb_drv") of
                ok -> ok;
                {error, already_loaded} -> ok;

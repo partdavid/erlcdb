@@ -81,6 +81,7 @@ $(EBIN):
 $(APP_TARGET): $(APP_SRC) ../vsn.mk $(BEAMS)
 	sed -e 's;%VSN%;$(VSN);' \
 		-e 's;%PFX%;$(PFX);' \
+		-e 's;%INSTALL_DST%;$(INSTALL_DST);' \
 		-e 's;%APP_NAME%;$(APP_NAME);' \
 		-e 's;%MODULES%;%MODULES%$(MODULES_COMMA);' \
 		$< > $<".tmp" 
