@@ -46,8 +46,11 @@ start() ->
    application:start(cdb).
 
 start(Type, _StartArgs) ->
-   %% TODO find appdir
-   case cdb_sup:start_link(".") of
+   Appdir = case application:get_env(cdb, privdir) of
+               {ok, Val} -> Val;
+               _ -> code:priv_dir()
+            end,
+   case cdb_sup:start_link(Appdir) of
       {ok, Pid} -> 
          {ok, Pid};
       Error ->
