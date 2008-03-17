@@ -1,8 +1,9 @@
 %% @author partdavid at gmail.com
 %% @copyright 2008 partdavid at gmail.com
 %% @doc The cdb application implements an interface to Dan J. Bernstein's
-%% cdb (constant database) files, using the 
-%% [http://www.corpit.ru/mjt/tinycdb.html TinyCDB shared library].
+%% cdb (constant database) files, using the
+%% <a href="http://www.corpit.ru/mjt/tinycdb.html">TinyCDB</a> shared
+%% library.
 %%
 %% This file is part of erlcdb.
 %%
@@ -17,7 +18,7 @@
 %% more details.
 %%
 %% You should have received a copy of the GNU Lesser General Public License
-%% along with erlcdb.  If not, see <http://www.gnu.org/licenses/>.
+%% along with erlcdb.  If not, see [http://www.gnu.org/licenses/].
 %%
 
 -module(cdb).
@@ -39,16 +40,21 @@
          close/1
         ]).
 
-%% @spec start(Type, StartArgs) -> {ok, Pid} | {ok, Pid, State} | {error, Reason}
-%% @doc Start the CDB application. The application must be started before
-%% using the CDB file lookup functions.
+%% @spec start() -> {ok, pid()} + {error, Reason}
+%%    Reason = any()
+%% @doc Starts the cdb application.
 start() ->
    application:start(cdb).
+
+%% @private
+%% @spec start(Type, StartArgs) -> {ok, Pid} + {error, Reason}
+%% @doc Start the CDB application. The application must be started before
+%% using the CDB file lookup functions.
 
 start(Type, _StartArgs) ->
    Appdir = case application:get_env(cdb, privdir) of
                {ok, Val} -> Val;
-               _ -> code:priv_dir()
+               _ -> code:priv_dir(cdb)
             end,
    case cdb_sup:start_link(Appdir) of
       {ok, Pid} -> 
@@ -82,7 +88,8 @@ open_file(File, Opts) ->
 lookup(Tab, Key) ->
    cdb_server:lookup(Tab, Key).
 
-%% @spec close(TableId::term())
+%% @spec close(TableId::term()) -> ok
+%% @doc Closes the table identified by the table id.
 close(Tab) ->
    cdb_server:close(Tab).
 
