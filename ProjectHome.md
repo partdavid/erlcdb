@@ -1,0 +1,1 @@
+The cdb application implements an interface to Dan J. Bernstein's cdb (constant database) files, using the [TinyCDB shared library](http://www.corpit.ru/mjt/tinycdb.html).
